@@ -18,8 +18,7 @@ The F2E 2022 第二關的作品，感謝有這個機會讓我接觸到 draggable
 ## Project Description 系統說明
 
 
-以 npm 引入 Vue 、 Sortable.js 、 html2canvas 、 animate.css ，
-normalize.css 、 fontAwesome 、 gsap 則是以 CDN 方式引入
+以 CDN 方式引入各套件、環境
 
 
 ## Folder Description 資料夾說明
