@@ -59,6 +59,9 @@ h3 {
   opacity: 1;
 }
 
+.cover-section {
+  user-select: none;
+}
 .cover-section .cover-page {
   display: flex;
   justify-content: center;

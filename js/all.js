@@ -314,7 +314,13 @@ const preloadImgAry = [
     './img/employ-2.png',
     './img/employ-3.png',
     './img/employ-4.png',
-    './img/title.png'
+    './img/title.png',
+    './img/character-woman.png',
+    './img/character-man.png',
+    './img/character-woman-unknown.png',
+    './img/character-man-unknown.png',
+    './img/character-woman-head.png',
+    './img/character-man-head.png',
 ]
 
 const coverPage = document.querySelector('.cover-page');
