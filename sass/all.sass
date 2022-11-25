@@ -1,0 +1,833 @@
+// normalize.css
+
+@import 'mixin'
+@import 'variables'
+@import '../node_modules/animate.css/animate.min.css'
+
+::-webkit-scrollbar
+    width: 0px
+*, *:not(i)::before, *:not(i)::after
+    font-family: 'Noto Sans TC'
+    font-style: normal
+    font-weight: 500
+    line-height: 180%
+    box-sizing: border-box
+
+ul
+    list-style: none
+    padding: 0
+
+button
+    border: none
+    cursor: pointer
+    user-select: none
+
+h1, h2, h3
+    +resetMarginAndPadding    
+
+h1
+    font-size: 40px
+
+h2
+    font-size: 32px
+
+h3
+    font-size: 24px
+
+.container
+    position: fixed
+    width: 100vw
+    height: 100vh
+    overflow: hidden
+    background-image: url('../img/bg.png')
+    +bgSizeAndRepeat
+    > section
+        width: 100vw
+        height: 100vh
+        display: none
+        opacity: 0
+        &:first-child
+            display: block
+            opacity: 1
+
+.cover-section
+    .cover-page
+        +flex
+        flex-direction: column
+        position: relative
+        width: 100vw
+        height: 100vh
+        overflow: hidden
+        user-select: none
+        .title-img
+            width: 58vw
+        .title-text
+            position: relative
+            line-height: 60px
+            letter-spacing: 14.5px
+            color: white
+            margin-bottom: 30vh
+            opacity: 0
+            animation: shining infinite linear 1.6s 2s
+            @keyframes shining 
+                0%
+                    opacity: 1
+                50%
+                    opacity: 1
+                51%
+                    opacity: 0
+                100%
+                    opacity: 0
+            &::before
+                display: block
+                content: attr(data-stroke)
+                position: absolute
+                z-index: -1
+                -webkit-text-stroke: 5px $colorGrayDark 
+                text-stroke: 5px $colorGrayDark
+        .employee
+            position: absolute
+            width: 100vw
+            height: 100vh
+            z-index: -1
+            img
+                +pos
+                width: 20%
+                transform-origin: center 25%
+                &:first-child
+                    +pos(10%)
+                    +transform(-65%, -15%, 100%, 108.58deg)
+                    animation: employee1 1s 1s ease-in-out forwards
+                    @keyframes  employee1
+                        to
+                            +transform(0, 0, 100%, 108.58deg)
+                &:nth-child(2)
+                    +pos(auto, auto, -30%, 10%)
+                    +transform(-25%, 40%, 100%, 21.37deg)
+                    animation: employee2 1s 1s ease-in-out forwards
+                    @keyframes  employee2 
+                        to
+                            +transform(0, 0, 100%, 21.37deg)
+                &:nth-child(3)
+                    +pos(auto, 15%, -30%)
+                    +transform(25%, 35%, 100%, -16.05deg)
+                    animation: employee3 1s 1s ease-in-out forwards
+                    @keyframes  employee3
+                        to
+                            +transform(0, 0, 100%, -16.05deg)
+                &:last-child
+                    +pos(10%, 0)
+                    +transform(65%, -15%, 100%, -124.58deg)
+                    animation: employee4 1s 1s ease-in-out forwards
+                    @keyframes  employee4
+                        to
+                            +transform(0, 0, 100%, -124.58deg)             
+    .cover-talking
+        opacity: 0
+        .cover-chat-box-container
+            width: 47vw
+            height: 100vh
+            margin: 13vh 0 0 16vw
+            .chat-box-0
+                +flex
+                +chatBox(18vw, 12vh)
+                padding: unset
+                img
+                    margin-right: 17px
+                    &:last-child
+                        margin-right: unset
+            .chat-box-1
+                +chatBox
+                opacity: 0
+                .chat-content
+                    line-height: 180%
+                    color: $colorGrayDark
+                .bottom-btn
+                    +flex(flex-end)
+                    .chat-button
+                        +flex(space-between)
+                        width: 13vw
+                        min-width: 256px
+                        padding: 0 24px
+                        font-size: 40px
+                        line-height: 60px
+                        color: white
+                        background-color: $colorPrimary
+                        border: 3px solid white
+                        border-radius: 10px
+        .cover-talking-character-div
+            position: fixed
+            top: 0
+            width: 100vw
+            height: 100vh
+            pointer-events: none
+            .cover-talking-character
+                +pos(auto, 20%, -5%)
+                width: 13vw
+            .character-name
+                +pos(auto, 19%, calc( -5% + 37vh ))
+                +chatBox
+                padding: 0 28px
+                line-height: 180%
+                color: $colorGrayDark
+                z-index: 1
+
+.naming-section
+    +pos(0)
+    background-color: white
+    &.active
+        display: block
+    .naming-page
+        +flex(flex-start)
+        flex-direction: column
+        height: 100vh
+        margin: 0 auto
+        padding: 6vh 30vw 0 30vw
+        opacity: 0
+        .choose-text
+            line-height: 60px
+            color: $colorGrayDark
+            margin-bottom: 12vh
+        .main-character-div
+            +flex(space-between)
+            width: 100%
+            margin-bottom: 9vh
+            div
+                +bgSizeAndRepeat
+                width: 12vw
+                height: 37.5vh
+                transition: 0.5s
+                cursor: pointer
+            .main-character-man
+                background-image: url("../img/character-man-unknown.png")
+                &:hover, &.active
+                    background-image: url("../img/character-man.png")
+            .main-character-woman
+                background-image: url("../img/character-woman-unknown.png")
+                &:hover, &.active
+                    background-image: url("../img/character-woman.png")
+        .name-input
+            +chatBox(27vw, 8vh)
+            border: 1px solid black
+            box-shadow: none
+            font-size: 32px
+            line-height: 60px
+            color: black
+            padding: 15px 0 15px 3vw
+            margin-bottom: 30px
+            &::placeholder
+                color: $colorGrayMid 
+            &:focus
+                outline: none
+        .confirm-btn
+            width: 27vw
+            height: 8vh
+            font-weight: 900
+            font-size: 40px
+            line-height: 60px
+            color: white
+            background-color: $colorPrimary
+            border-radius: 30px
+
+.tutorial-section
+    .tutorial-page
+        +pos(0)
+        +flex(flex-start)
+        flex-direction: column
+        width: 100vw
+        height: 100vh
+        display: none
+        opacity: 0
+        .title
+            +chatBox(auto, 13vh)
+            text-align: center
+            line-height: 60px
+            color: $colorGrayDark
+            padding: 3.5vh 7vw
+            margin: 3vh 0 30px 0
+            img
+                vertical-align: text-bottom
+        .tutorial-box
+            +chatBox(50vw, 85vh)
+            +flex(flex-start)
+            flex-direction: column
+            padding: 3vh 2vw
+            +transform(0, 3%)
+            .backlog-title
+                font-weight: 700
+                line-height: 50px
+                color: $colorGrayDark
+            .backlog-list
+                +flex(flex-start)
+                flex-direction: column
+                width: 100%
+                margin-bottom: 3vh
+                span
+                    font-size: 20px
+                    line-height: 50px
+                    color: $colorGrayMid
+                .drag-place
+                    position: relative
+                    width: 100%
+                    height: calc( (7vh + 15px) * 4)
+                    z-index: 1
+                    .backlog-card
+                        +flex(flex-start)
+                        width: 45vw
+                        height: 7vh
+                        font-size: 20px
+                        line-height: 50px
+                        color: $colorGrayDark
+                        background-color: $colorGreen
+                        border: 1.5px solid $colorGrayDark
+                        margin-bottom: 15px
+                        padding: 1vh 1.5vw
+                        z-index: 0
+                        cursor: grab
+                        user-select: none
+                        &.outline
+                            background-color: transparent
+                            border: 2px dashed $colorGrayMid
+                            cursor: unset
+            .backlog-drag-layer
+                width: 0vw
+                height: 0vh
+                z-index: 1
+                position: relative
+                .backlog-card
+                    +flex(flex-start)
+                    width: 40vw
+                    height: 7vh
+                    font-size: 20px
+                    line-height: 50px
+                    color: $colorGrayDark
+                    background-color: $colorGreen
+                    border: 1.5px solid $colorGrayDark
+                    margin-bottom: 15px
+                    padding: 1vh 1.5vw
+                    cursor: grab
+                    user-select: none
+                    &[data-id="0"]
+                        +pos(-45vh, auto, auto , 7vw)
+                    &[data-id="1"]
+                        +pos(-35vh, auto, auto, 3vw)
+                    &[data-id="2"]
+                        +pos(-30vh, 5vw)
+                    &[data-id="3"]
+                        +pos(-20vh, auto, auto, 7vw)
+            .confirm-btn
+                width: 27vw
+                height: 8vh
+                font-weight: 900
+                font-size: 40px
+                line-height: 60px
+                color: white
+                background-color: $colorPrimary
+                border-radius: 30px
+
+.backlog-section
+    .chat-box-container
+        .chat-box
+            .chat-content
+                img
+                    vertical-align: text-bottom
+    .backlog-test-page
+        .test-div
+            +flex(space-between)
+            width: 75vw
+            position: relative
+            img
+                +pos(0, 0)
+                +transform(0, -100%)
+                width: 6vw
+                z-index: 1
+            >div
+                +chatBox(36.5vw, 85vh)
+                +flex(flex-start)
+                flex-direction: column
+                padding: 3vh 2vw
+                h2
+                    font-weight: 700
+                    line-height: 50px
+                    color: $colorGrayDark
+                ul
+                    +flex(flex-start)
+                    flex-direction: column
+                    width: 100%
+                    margin-bottom: 5vh
+                    span
+                        font-size: 20px
+                        line-height: 50px
+                    div
+                        +flex(flex-start)
+                        flex-direction: column
+                        width: 100%
+                        z-index: 1
+                        li
+                            +flex(space-between)
+                            width: 100%
+                            height: 7vh
+                            font-size: 20px
+                            line-height: 50px
+                            color: $colorGrayDark
+                            background-color: $colorGreen
+                            border: 1.5px solid $colorGrayDark
+                            margin-bottom: 15px
+                            padding: 1vh 1vw
+                            cursor: grab
+                            user-select: none
+                            &.outline
+                                border: 2px dashed $colorGrayMid !important
+                                background-color: transparent !important
+                                z-index: 0
+                                cursor: unset
+                            .score-circle
+                                +flex
+                                flex: 1
+                                flex-grow: 0
+                                flex-shrink: 0
+                                font-weight: 700
+                                min-width: 2.5vw
+                                height: 2.5vw
+                                font-size: 24px
+                                color: $colorGrayDark
+                                background-color: white
+                                border: 2px solid $colorGrayDark
+                                border-radius: 50%
+            .backlog-list-div
+                span
+                    color: $colorGrayMid
+                .backlog-card
+                    background-color: $colorGreen
+                    border: 1.5px solid $colorGrayDark
+            .sprint-backlog-div
+                background-color: $colorTertiary
+                span
+                    color: $colorGrayDark
+                    &.active
+                        color: $colorSecondary
+        @media (max-width: 1919px)
+            .title
+                +chatBox(87.5vw, 13vh)
+            .test-div
+                width: 87.5vw
+                >div
+                    +chatBox(42.5vw, 85vh)
+                    padding: 3vh 2vw
+    .character-div
+        .character-page
+            +pos(0)
+            width: 100vw
+            height: 100vh
+            +transform(0, 50%)
+            opacity: 0
+            &:first-child
+                opacity: 1
+                +transform(0, 0)
+        .character
+            &.LS
+                +pos(auto, auto, -5%, 15%)
+            &.Crum
+                +pos(auto, auto, -5%, 30%)
+        .character-name
+            +pos(auto, 19%, calc( -5% + 42vh ))
+            &.low-pos
+                +pos(auto, 19%, calc( -5% + 37vh ))
+            &.LS
+                +pos(auto, auto, calc( -5% + 42vh ), 13%)
+            &.Crum
+                +pos(auto, auto, calc( -5% + 42vh ), 39%)
+
+.sprint-section
+    .sprint-test-page
+        +transform(0, 5%)
+        .test-div
+            +chatBox(72.5vw, 85vh)
+            +flex(flex-start)
+            flex-direction: column
+            padding: 3vh 2vw
+            position: relative
+            background-image: url('../img/scrum-bg.png')
+            +bgSizeAndRepeat(95% auto, center 35%)
+            img
+                +pos(0, 0)
+                +transform(0, -100%)
+                width: 6vw
+                z-index: 1
+            &::after
+                +pos(47.5%, auto, auto, 20%)
+                content: 'Sprint'
+                font-weight: 700
+                font-size: 32px
+                line-height: 50px
+                color: $colorGrayDark
+            .scrum-title
+                    font-weight: 700
+                    line-height: 50px
+                    color: $colorGrayDark
+            .scrum-div
+                +flex(flex-start)
+                flex-direction: column
+                width: 100%
+                position: relative
+                ul li
+                    +flex(space-between)
+                    width: 22.5vw
+                    height: 7vh
+                    font-size: 20px
+                    line-height: 50px
+                    color: $colorGrayDark
+                    background-color: $colorGreen
+                    border: 1.5px solid $colorGrayDark
+                    margin-bottom: 15px
+                    padding: 1vh 0.5vw
+                    user-select: none
+                    cursor: grab
+                    &.outline
+                        border: 2px dashed $colorGrayMid !important
+                        background-color: transparent !important
+                        z-index: 0
+                        cursor: unset
+                .put-place
+                    width: 0vw
+                    height: 0vh
+                    margin: 0
+                    li
+                        &:first-child
+                            +pos(10vh, auto, auto, 15vw)
+                        &:nth-child(2)
+                            +pos(45vh, 25vw)
+                        &:last-child    
+                            +pos(45vh, 0vw)
+                .drag-place
+                    width: 0vw
+                    height: 0vh
+                    z-index: 1
+                    position: relative
+                    li[data-id='0']
+                        +pos(10vh, auto, auto, 5vw)
+                    li[data-id='1']
+                        +pos(20vh, auto, auto, 10vw)
+                    li[data-id='2']
+                        +pos(30vh)
+            .confirm-btn
+                margin-top: 50vh
+        @media (max-width: 1919px)
+            +transform(0, 7%)
+            .title
+                +chatBox(87.5vw, 13vh)
+            .test-div .confirm-btn
+                margin-top: 46vh
+    .character-name
+        +pos(auto, 19%, calc( -5% + 42vh ))
+
+.retro-section
+    .retro-test-page
+        +transform(0, 3%)
+        @media (max-width: 1919px)
+            +transform(0, 0%)
+        .test-div
+            +chatBox(72.5vw, 85vh)
+            +flex(flex-start)
+            flex-direction: column
+            padding: 3vh 2vw
+            position: relative
+            img
+                +pos(0, 0)
+                +transform(0, -100%)
+                width: 6vw
+                z-index: 1
+            .retro-div
+                +flex(flex-start)
+                flex-direction: column
+                width: 100%
+                position: relative
+                h2
+                    color: $colorGrayDark
+                    &.question
+                        font-weight: 700
+                        margin-bottom: 2vh
+                >div
+                    +flex(flex-start, flex-start)
+                    flex-direction: column
+                    width: 95%
+                    margin-bottom: 1.5vh
+                    label
+                        +flex(flex-start)
+                        width: 100%
+                        border: 2px dashed $colorGrayDark
+                        border-radius: 82px
+                        padding: 1vh 1vw
+                        margin-bottom: 2vh
+                        cursor: pointer
+                        user-select: none
+                        &:has(input:checked)
+                            border: 2px solid $colorGrayDark
+                            .check-mark
+                                    i
+                                        opacity: 1
+                        &:hover
+                            border: 2px solid $colorGrayDark
+                            .check-mark
+                                box-shadow: 0px 0px 3px rgba(116, 48, 48, 0.4)
+                                i
+                                    opacity: 0.3
+                        input
+                            display: none
+                        .check-mark
+                            +flex
+                            width: 40px
+                            height: 40px
+                            background-color: white
+                            border: 2px solid $colorGrayDark
+                            border-radius: 50%
+                            margin-right: 2vw
+                            i
+                                opacity: 0
+                                font-size: $fontSizeS
+                                color: $colorGrayDark
+    .character-name
+        +pos(auto, 19%, calc( -5% + 42vh ))
+
+.ending-section
+    .chat-box-container
+        .chat-box
+            &:last-child
+                position: relative
+                width: 25vw
+                height: 45vh
+                cursor: pointer
+                user-select: none
+                &:hover
+                    box-shadow: 0px 8px 50px rgba(116, 48, 48, 0.4)
+    .character-name
+        +pos(auto, 19%, calc( -5% + 42vh ))
+    .ending-page
+        +flex
+        position: relative
+        width: 100vw
+        height: 100vh
+        user-select: none
+        .side-btn
+            +flex(space-around)
+            flex-direction: column
+            +pos(0, 15%)
+            width: 100px
+            height: 35vh
+            padding-top: 5vh
+            div
+                +flex
+                flex-direction: column
+                cursor: pointer
+                margin-bottom: 2vh
+                *
+                    pointer-events: none
+                img
+                    width: 100%
+                h3
+                    text-shadow: 0px 4px 30px rgba(116, 48, 48, 0.4)
+                    color: white
+        .character-div
+            +flex(space-between)
+            +pos(auto, auto, 0)
+            width: 75vw
+            height: unset
+            +transform(0, 15%)
+            div
+                +flex(space-between)
+                width: 22vw
+            .character
+                position: unset
+                width: 10vw
+    .certificate
+        +flex
+        width: 40vw
+        height: 95vh
+        background-color: white
+        box-shadow: 0px 4px 30px rgba(116, 48, 48, 0.4)
+        backdrop-filter: blur(15px)
+        border-radius: 30px
+        opacity: 0
+        &.snapshot
+            +transform(-20%, -27.5%, 33%)
+            +pos(0, auto, auto, 0)
+            pointer-events: none
+            opacity: 1
+        .inside-line
+            +flex(flex-start)
+            flex-direction: column
+            width: 85%
+            height: 90%
+            border: 11px solid $colorTertiary
+            position: relative
+            padding: 3vh 2vw
+            color: $colorGrayDark
+            text-align: center
+            .hex-logo
+                +pos(-5%, 50%)
+                background-color: white
+                +transform(50%, 0)
+            .title
+                font-weight: 700
+                margin: 7vh 0 5vh 0
+                position: relative
+                img
+                    +pos(50%, auto, auto, -100%)
+                    +transform(-50%, -50%)
+                    width: 8vw
+
+            .content
+                margin-bottom: 5vh
+            .sign-font
+                font-family: 'STXingkai'
+                font-weight: 400
+                font-size: 64px
+            .footer
+                +pos(auto, auto, 0)
+                .date
+                    font-size: 24px
+            @media (max-width: 1919px) 
+                h2
+                    font-size: 24px
+                .footer
+                    line-height: 150%
+                    .date
+                        font-size: 18px  
+
+.for-preload
+    +pos(-100%, -100%)
+    width: 0px
+    height: 0px
+    overflow: hidden
+
+.alert-page
+    +pos(0)
+    +flex
+    width: 100vw
+    height: 100vh
+    z-index: 1
+    background: rgba(black, 0.5)
+    .alert-block
+        +chatBox(40vw)
+        .alert-content
+            line-height: 180%
+            color: $colorGrayDark
+            margin-bottom: 3vh
+        .bottom-btn
+            +flex(flex-end)
+            .chat-button
+                +flex(space-between)
+                width: 9vw
+                min-width: 175px
+                padding: 0 24px
+                font-size: 40px
+                line-height: 60px
+                color: $colorGrayMid
+                background: transparent
+                border: 3px solid $colorGrayMid
+                border-radius: 10px
+                img
+                    // filter from https://codepen.io/sosuke/pen/Pjoqqp
+                    filter: brightness(0) saturate(100%) invert(74%) sepia(16%) saturate(81%) hue-rotate(338deg) brightness(104%) contrast(98%)  
+.character-div
+    position: fixed
+    top: 0
+    width: 100vw
+    height: 100vh
+    pointer-events: none
+    .character
+        +pos(auto, 20%, -5%)
+        width: 13vw
+    .character-name
+        +pos(auto, 19%, calc( -5% + 37vh ))
+        +chatBox
+        padding: 0 28px
+        line-height: 180%
+        color: $colorGrayDark
+        z-index: 1 
+.chat-box-container  
+        width: 47vw
+        height: 100vh
+        margin: 4vh 0 0 13vw  
+        .chat-box   
+            +chatBox(57vw)
+            max-height: 90vh
+            overflow-y: scroll
+            margin-bottom: 60px
+            opacity: 0
+            +transform(30%)
+            &:first-child
+                opacity: 1
+                +transform(0)
+            .chat-content
+                line-height: 180%
+                color: $colorGrayDark
+                .highlight
+                    color: $colorPrimary
+                img
+                    vertical-align: bottom
+                ul
+                    list-style: unset
+                    padding-left: 35px
+                    margin-top: 0
+            .bottom-btn
+                +flex(flex-end)
+                &.hidden
+                    visibility: hidden
+                .chat-button
+                    +flex(space-between)
+                    width: 7vw
+                    min-width: 175px
+                    padding: 0 24px
+                    font-size: 40px
+                    line-height: 60px
+                    color: $colorGrayMid
+                    background: transparent
+                    border: 3px solid $colorGrayMid
+                    border-radius: 10px
+                    img
+                        // filter from https://codepen.io/sosuke/pen/Pjoqqp
+                        filter: brightness(0) saturate(100%) invert(74%) sepia(16%) saturate(81%) hue-rotate(338deg) brightness(104%) contrast(98%)  
+                    &.start
+                        width: 13vw
+                        min-width: 256px
+                        color: white
+                        background-color: $colorPrimary
+                        border: 3px solid white
+                        img
+                            filter: unset
+.prev-btn
+    +flex
+    +pos(auto, auto, 43px, 43px)
+    width: 80px
+    height: 76px
+    z-index: 1
+    cursor: pointer
+    .prev-btn-img
+        width: 100%
+        pointer-events: none
+div[class$='test-page']
+    +flex
+    flex-direction: column
+    width: 100vw
+    height: 100vh
+    +transform(0, 7%)
+    opacity: 0
+    .title
+        +chatBox(75vw, 13vh)
+        +flex(flex-start)
+        line-height: 60px
+        color: $colorGrayDark
+        padding: 3.5vh 7vw
+        margin: 3vh 0 30px 0
+    .confirm-btn
+        width: 27vw
+        min-width: 475px
+        height: 8vh
+        min-height: 90px
+        font-weight: 900
+        font-size: 40px
+        line-height: 60px
+        color: white
+        background-color: $colorPrimary
+        border-radius: 30px

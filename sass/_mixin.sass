@@ -1,0 +1,54 @@
+=flex($j: center, $a: center)
+    display: flex
+    justify-content: $j
+    align-items: $a
+
+=bgSizeAndRepeat($s: 100% 100%, $p: unset, $r: no-repeat)
+    background-size: $s
+    background-position: $p
+    background-repeat: $r
+
+=transform($x: 0%, $y: 0%, $s: 100%, $r: 0deg)
+    transform: translate($x, $y) scale($s) rotate($r)
+
+=pos($t: auto, $r: auto, $b: auto, $l: auto, $p: absolute)
+    position: $p
+    top: $t
+    left: $l
+    right: $r
+    bottom: $b
+
+=hideUploadInput
+    display: none
+    // IE 8 not support input that display: none
+    // http://jsfiddle.net/9Lzjzwr7/
+    position: absolute
+    top: -50%
+    left: -50%
+    width: 1px
+    height: 1px
+    padding: 0
+    margin: -1px
+    overflow: hidden
+    clip: rect(0,0,0,0)
+    border: 0
+
+=textWithGraident
+    background-clip: text
+    text-fill-color: transparent
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+
+=resetMarginAndPadding
+    margin: 0
+    padding: 0
+
+=chatBox($w: auto, $h: auto)
+    width: $w
+    height: $h
+    padding: 5.5vh 5vw
+    background: rgba(#FFF, 0.9)
+    box-shadow: 0px 4px 30px rgba(116, 48, 48, 0.4)
+    backdrop-filter: blur(15px)
+    border-radius: 30px
+    text-align: left

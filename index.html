@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The F2E 2022 W3</title>
+
+    <meta name='description' content="SmallA　The F2E 2022 W3, Start: 221122  Latest: 221126">
+
+    <meta property="og:title" content="SmallA　The F2E 2022 W3">
+    <meta property="og:description" content="Start: 221122  Latest: 221126">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="#">
+    <meta property="og:img" content="./img/hex.png">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="zh-Hant">
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="./img/hex.png" type="image/x-icon"/>  
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" href="./css/all.css">
+</head>
+<body>
+    <div class="container" id="app">
+        <section class="cover-section">
+            <div class="cover-page">
+                <img src="./img/title.png" alt="title-img" class="title-img animate__animated animate__backInDown">
+                <h2 class="title-text" data-stroke="任意點擊開始">任意點擊開始</h2>
+                <div class="employee">
+                    <img src="./img/employ-3.png" alt="employ" class="employ">
+                    <img src="./img/employ-1.png" alt="employ" class="employ">
+                    <img src="./img/employ-4.png" alt="employ" class="employ">
+                    <img src="./img/employ-2.png" alt="employ" class="employ">
+                </div>
+            </div>
+            <div class="cover-talking">
+                <div class="cover-chat-box-container">
+                    <div class="chat-box-0">
+                        <img src="./img/chat-dot.png" alt="chat-dot" class="chat-dot">
+                        <img src="./img/chat-dot.png" alt="chat-dot" class="chat-dot">
+                        <img src="./img/chat-dot.png" alt="chat-dot" class="chat-dot">
+                    </div>
+                    <div class="chat-box-1">
+                        <h2 class="chat-content">
+                            菜鳥！恭喜你成為六角學院的正式員工啦！<br>在正式加入專案開發之前，<br>
+                            需要請你先了解 Scrum 的流程與精神！<br><br>
+                            成功通過 Scrum 新手村的試煉吧！
+                        </h2>
+                        <div class="bottom-btn">
+                            <button class="chat-button">
+                                開始試煉
+                                <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="cover-talking-character-div">
+                    <img src="./img/employ-3.png" alt="cover-talking-character" class="cover-talking-character">
+                    <h2 class="character-name">？？？</h2>
+                </div>
+            </div>
+        </section>
+        <section class="naming-section">
+            <div class="naming-page">
+                <h1 class="choose-text">請選擇代表你的角色。</h1>
+                <div class="main-character-div" @click="chooseSexual">
+                    <div class="main-character-man"></div>
+                    <div class="main-character-woman"></div>
+                </div>
+                <input type="text" class="name-input" placeholder="請輸入你的名字。" maxlength="10" v-model="name">
+                <button class="confirm-btn" @click="checkInfo">確定</button>
+            </div>
+            <div class="alert-page" v-if="isAlertShow">
+                <div class="alert-block">
+                    <h2 class="alert-content" v-html="alertMsg"></h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button" @click="confirmAlert">
+                            好的
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="character-div">
+                    <img src="./img/employ-3.png" alt="character" class="character">
+                    <h2 class="character-name">？？？</h2>
+                </div>
+            </div>
+        </section>
+        <section class="tutorial-section">
+            <div class="chat-box-container">
+                <div class="chat-box">
+                    <h2 class="chat-content">
+                        哈囉~{{ name }}。<br>
+                        我是開發 A 組的 PO，小敏。<br><br>
+                        PO也就是<span class="highlight">產品負責人(Product Owner)</span>。<br>
+                        產品負責人會負責評估產品待辦清單的價值與重要性，依序排列要執行的優先順序，對齊產品目標。最後排出產品待辦清單(Product Backlog)唷！<br><br>
+                        剛好我最近手邊有一個『人才招募系統』的案子，我才剛列出了『產品需求清單』。既然你都來了，<span class="highlight">來試試看調整產品優先度，排出產品待辦清單吧！</span>
+                    </h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button start">
+                            開始試煉
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="tutorial-page">
+                <div class="title">
+                    <h3>請把需求放到產品待辦清單，並調整待辦的優先度順序。公司也推薦使用
+                    <img src="./img/jira.png" alt="jira-img" class="jira-img">
+                    來做任務的管理喔！
+                    </h3>
+                </div>
+                <div class="tutorial-box">
+                    <h2 class="backlog-title">產品代辦清單 ProductBacklog</h2>
+                    <ul class="backlog-list">
+                        <span class="backlog-priority-high">
+                            優先度高
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </span>
+                        <div class="drag-place">
+                            <li class="backlog-card outline"></li>
+                            <li class="backlog-card outline"></li>
+                            <li class="backlog-card outline"></li>
+                            <li class="backlog-card outline"></li>
+                        </div>
+                        <span class="backlog-priority-low">
+                            優先度低
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </span>
+                    </ul>
+                    <button class="confirm-btn" @click="checkTutorial">我完成了！</button>
+                    <ul class="backlog-drag-layer">
+                        <li class="backlog-card" draggable="true"data-id="0">會員系統（登入、註冊、管理）</li>
+                        <li class="backlog-card" draggable="true"data-id="1">後台職缺管理功能 （資訊上架、下架、顯示應徵者資料）</li>
+                        <li class="backlog-card" draggable="true"data-id="2">前台職缺列表 （缺詳細內容、點選可發送應徵意願）</li>
+                        <li class="backlog-card" draggable="true"data-id="3">應徵者的線上履歷編輯器</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="character-div">
+                <img src="./img/employ-3.png" alt="character" class="character">
+                <h2 class="character-name">小敏</h2>
+            </div>
+            <div class="alert-page" v-if="isAlertShow">
+                <div class="alert-block">
+                    <h2 class="alert-content" v-html="alertMsg"></h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button" @click="confirmAlert(alertBtnText)">
+                            {{ alertBtnText }}
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="character-div">
+                    <img src="./img/employ-3.png" alt="character" class="character">
+                    <h2 class="character-name">小敏</h2>
+                </div>
+            </div>
+        </section>
+        <section class="backlog-section">
+            <div class="chat-box-container">
+                <div class="chat-box" data-page="0">
+                    <h2 class="chat-content">
+                        產品待辦清單好了之後，<br>
+                        我們來召集 Scrum Master 和開發團隊共同召開<span class="highlight">短衝規劃會議（Sprint Planning）</span>。<br>
+                        短衝即是一個迭代，具有固定時間限制，我們會在這個會議中，決定要完成哪些工作事項來達到商業需求，<span class="highlight">列出短衝待辦清單（Sprint Backlog）</span>，並由開發團隊在接下來的產品開發週期裡執行。
+                    </h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button" @click="changePage('next')">
+                            繼續
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="chat-box" data-page="1">
+                    <h2 class="chat-content">
+                        嗨嗨！你是新來的前端吧！<br>
+                        我是這次的 Scrum Master 小捷，<br>
+                        我的工作主要是促成開發團隊成員協作、引導團隊進行自省會議，提升團隊成員對 Scrum 瞭解。
+                    </h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button" @click="changePage('next')">
+                            繼續
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="chat-box" data-page="2">
+                    <h2 class="chat-content">
+                        這兩位是小斯和小廣，是我們開發團隊的成員唷～ 目前我們團隊一次 Sprint 週期是兩週的時間，依照我的觀察，目前團隊可以負擔的點數 (Sprint Point) 大約是 20 點左右。
+                    </h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button" @click="changePage('next')">
+                            繼續
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="chat-box" data-page="3">
+                    <h2 class="chat-content">
+                        菜鳥，你應該不知道點數是什麼意思吧哈哈！<br>
+                        我來跟你介紹一下吧～<br>
+                        Sprint Point 目的是為了衡量速度，是用大概花費的時間預估出的相對點數。
+                    </h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button" @click="changePage('next')">
+                            繼續
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="chat-box" data-page="4">
+                    <h2 class="chat-content">
+                        沒錯，如同小斯說的，我這邊已經把剛剛討論好的點數標上去囉～你來練習<span class="highlight">把任務排到短衝待辦清單</span>吧！<br>
+                        By the way，我們平常管理任務是使用
+                        <img src="./img/jira.png" alt="jira-img" class="jira-img">
+                        這套軟體，你有時間記得先去註冊和熟悉唷～
+                    </h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button start" @click="startTest">
+                            開始試煉
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="backlog-test-page">
+                <div class="title">
+                    <h3>請將產品待辦清單中的項目拖曳到短衝清單。 (20點內)</h3>
+                </div>
+                <div class="test-div">
+                        <img src="./img/employ-4.png" alt="backlog-test-character-img" class="backlog-test-character-img">
+                    <div class="backlog-list-div">
+                        <h2 class="backlog-title">產品代辦清單 ProductBacklog</h2>
+                        <ul class="backlog-list">
+                            <span class="backlog-priority-high">
+                                優先度高
+                                <i class="fa-solid fa-arrow-up"></i>
+                            </span>
+                            <div class="drag-place">
+                                <li class="backlog-card" data-score="8">
+                                    前台職缺列表（職缺詳細內容、點選可發送應徵意願）
+                                    <div class="score-circle">
+                                        8
+                                    </div>
+                                </li>
+                                <li class="backlog-card" data-score="5">
+                                    後台職缺管理功能（資訊上架、下架、顯示應徵者資料）
+                                    <div class="score-circle">
+                                        5
+                                    </div>
+                                </li>
+                                <li class="backlog-card" data-score="4">
+                                    會員系統（登入、註冊、管理）
+                                    <div class="score-circle">
+                                        4
+                                    </div>
+                                </li>
+                                <li class="backlog-card" data-score="13">
+                                    應徵者的線上履歷編輯器
+                                    <div class="score-circle">
+                                        13
+                                    </div>
+                                </li>
+                            </div>
+                            <span class="backlog-priority-low">
+                                優先度低
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </span>
+                        </ul>
+                    </div>
+                    <div class="sprint-backlog-div">
+                        <h2 class="sprint-backlog-title">開發Ａ組的短衝待辦清單
+                        </h2>
+                        <ul class="sprint-backlog-list">
+                            <span class="sprint-backlog-score-now">
+                                {{ backlogScore }}/20點
+                            </span>
+                            <div class="put-place">
+                                <li class="backlog-card outline" data-score="0"></li>
+                                <li class="backlog-card outline" data-score="0"></li>
+                                <li class="backlog-card outline" data-score="0"></li>
+                                <li class="backlog-card outline" data-score="0"></li>
+                            </div>
+                        </ul>
+                        <button class="confirm-btn" @click="checkBacklog">準備好了，開始 Sprint</button>
+                    </div>
+                </div>
+            </div>
+            <div class="character-div">
+                <div class="character-page" data-page="0">
+                    <img src="./img/employ-3.png" alt="character" class="character">
+                    <h2 class="character-name low-pos">小敏</h2>
+                </div>
+                <div class="character-page" data-page="1">
+                    <img src="./img/employ-4.png" alt="character" class="character">
+                    <h2 class="character-name">小捷</h2>
+                </div>
+                <div class="character-page" data-page="2">
+                    <img src="./img/employ-1.png" alt="character" class="character LS">
+                    <h2 class="character-name LS">小斯</h2>
+                    <img src="./img/employ-2.png" alt="character" class="character Crum">
+                    <h2 class="character-name Crum">小廣</h2>
+                    <img src="./img/employ-4.png" alt="character" class="character">
+                    <h2 class="character-name">小捷</h2>
+                </div>
+                <div class="character-page" data-page="3">
+                    <img src="./img/employ-1.png" alt="character" class="character">
+                    <h2 class="character-name">小斯</h2>
+                </div>
+                <div class="character-page" data-page="4">
+                    <img src="./img/employ-2.png" alt="character" class="character">
+                    <h2 class="character-name">小廣</h2>
+                </div>
+            </div>
+            <div class="alert-page" v-if="isAlertShow">
+                <div class="alert-block">
+                    <h2 class="alert-content" v-html="alertMsg"></h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button" @click="confirmAlert(alertBtnText)">
+                            {{ alertBtnText }}
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="character-div">
+                    <img src="./img/employ-4.png" alt="character" class="character">
+                    <h2 class="character-name">小捷</h2>
+                </div>
+            </div>
+            <div class="prev-btn" v-if="isPrevShow" @click="changePage('prev')">
+                <img src="./img/prev.svg" alt="prev-btn-img" class="prev-btn-img">
+            </div>
+        </section>
+        <section class="sprint-section">
+            <div class="chat-box-container">
+                <div class="chat-box" data-page="0">
+                    <h2 class="chat-content">
+                        等等等等等，你都還不知道什麼是 <span class="highlight">Sprint</span> 吧！ 讓我先為你介紹一下～ 仔細聽好唷，等等會考考你！
+                    </h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button" @click="changePage('next')">
+                            繼續
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="chat-box" data-page="1">
+                    <h2 class="chat-content">
+                        <span class="highlight">Sprint 是一個短衝</span>，開發團隊會在這期間執行開發。<br>
+                        在這段期間內，開發團隊舉辦<span class="highlight">每日站立會議 Daily Scrum</span>，追蹤成員間的工作狀況。<br><br>
+                        除了每日站立會議，在 Sprint 結束後也會有：<br>
+                        <span class="highlight">短衝檢視會議 SprintReview</span>、<br>
+                        <span class="highlight">短衝自省會議 Sprint Retrospective</span>。<br>
+                    </h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button" @click="changePage('next')">
+                            繼續
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="chat-box" data-page="2">
+                    <h2 class="chat-content">
+                        <span class="highlight">每日站立會議 Daily Scrum</span><br><br>
+                        每天都要進行的會議，以 15 分鐘為限制<br>
+                        <ul>
+                            <li>昨天為團隊的短衝目標（Sprint Goal）做了那些進度</li>
+                            <li>今天我會如何準備來幫助團隊達到短衝目標</li>
+                            <li>過程中有遇到什麼問題、難題</li>
+                        </ul>
+                        透過團隊分享，追蹤大家的工作狀況。
+                    </h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button" @click="changePage('next')">
+                            繼續
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="chat-box" data-page="3">
+                    <h2 class="chat-content">
+                        <span class="highlight">短衝檢視會議 Sprint Review</span><br><br>
+                            用來檢視該次短衝增量的成果，<br>
+                            以蒐集相關的回饋數據或意見。
+                    </h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button" @click="changePage('next')">
+                            繼續
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="chat-box" data-page="4">
+                    <h2 class="chat-content">
+                        <span class="highlight">短衝自省會議 Sprint Retrospective</span><br><br>
+                        團隊在自省會議裡，<br>
+                        會共同回顧該短衝歷程發生的事情：
+                        <ul>
+                            <li>好的地方</li>
+                            <li>可以改進的地方</li>
+                            <li>如何維持我們已有的成功經驗</li>
+                        </ul>
+                        優化工作流程、讓團隊有變得更好的機會。<br>
+                        推薦工具：<img src="./img/confluence.png" alt="confluence-img" class="confluence-img">
+                    </h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button start" @click="startTest">
+                            開始試煉
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="sprint-test-page">
+                <div class="title">
+                    <h3>在這經典的 Scrum 流程圖中，這些流程分別代表哪一個會議呢？請把對應的流程拖曳到正確位置。</h3>
+                </div>
+                <div class="test-div">
+                    <img src="./img/employ-1.png" alt="backlog-test-character-img" class="backlog-test-character-img">
+                    <div class="scrum-div">
+                        <h2 class="scrum-title">Scrum 流程圖</h2>
+                        <ul class="put-place">
+                            <li class="scrum-card outline"></li>
+                            <li class="scrum-card outline"></li>
+                            <li class="scrum-card outline"></li>
+                        </ul>
+                        <ul class="drag-place">
+                            <li class="scrum-card" data-id="0">短衝檢視會議 Sprint Review</li>
+                            <li class="scrum-card" data-id="1">短衝自省會議 Sprint Retrospective</li>
+                            <li class="scrum-card" data-id="2">每日站立會議(Daily Scrum)</li>
+                        </ul>
+                    </div>
+                    <button class="confirm-btn" @click="checkSprint">我完成了！</button>
+                </div>
+            </div>
+            <div class="character-div">
+                <img src="./img/employ-1.png" alt="character" class="character">
+                <h2 class="character-name">小斯</h2>
+            </div>
+            <div class="alert-page" v-if="isAlertShow">
+                <div class="alert-block">
+                    <h2 class="alert-content" v-html="alertMsg"></h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button" @click="confirmAlert(alertBtnText)">
+                            {{ alertBtnText }}
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="character-div">
+                    <img src="./img/employ-1.png" alt="character" class="character">
+                    <h2 class="character-name">小斯</h2>
+                </div>
+            </div>
+            <div class="prev-btn" v-if="isPrevShow" @click="changePage('prev')">
+                <img src="./img/prev.svg" alt="prev-btn-img" class="prev-btn-img">
+            </div>
+        </section>
+        <section class="retro-section">
+            <div class="chat-box-container">
+                <div class="chat-box" data-page="0">
+                    <h2 class="chat-content">
+                        哇賽新來的，你真的很幸運，
+                        今天剛好是開發 B 組的 Retro，你也來見識一下，看看 <span class="highlight">Retro</span> 都該做些什麼吧～～<br><br>
+                        我們會在會議裡請團隊成員提出哪些是做得好的地方、哪些可以繼續改善的地方？並記錄在
+                        <img src="./img/confluence.png" alt="confluence-img" class="confluence-img">
+                        中。 Retro 重點在於<span class="highlight">「正面表述」</span>，你也思考看看，哪一些是適合 Retro 的回饋吧～～                                 中。 Retro 重點在於「正面表述」，你也思考看看，哪一些是適合 Retro 的回饋吧～～
+                    </h2>
+                    <div class="bottom-btn" @click="startTest">
+                        <button class="chat-button">
+                            繼續
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="retro-test-page">
+                <div class="title">
+                    <h3>重點在於「正面表述」，你也思考看看，哪一些是適合 Retro 的回饋吧！</h3>
+                </div>
+                <div class="test-div">
+                    <img src="./img/employ-2.png" alt="backlog-test-character-img" class="backlog-test-character-img">
+                    <div class="retro-div">
+                        <div class="question-0">
+                            <h2 class="question">做得好的地方</h2>
+                            <label for="Q0-A0">
+                                <input type="radio" name="Q0-answer" id="Q0-A0" value="0">
+                                <div class="check-mark">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <h2>這次我幫了很多人救火耶^_^</h2>
+                            </label>
+                            <label for="Q0-A1">
+                                <input type="radio" name="Q0-answer" id="Q0-A1" value="1">
+                                <div class="check-mark">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <h2>大家在開發上都會互相 cover，讓任務都有準時在時間內完成。</h2>
+                            </label>
+                        </div>
+                        <div class="question-1">
+                            <h2 class="question">有哪些可以做得更好？</h2>
+                            <label for="Q1-A0">
+                                <input type="radio" name="Q1-answer" id="Q1-A0" value="0">
+                                <div class="check-mark">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <h2>可以記錄這次的開發時間，讓預估團隊點數可以更精準。</h2>
+                            </label>
+                            <label for="Q1-A1">
+                                <input type="radio" name="Q1-answer" id="Q1-A1" value="1">
+                                <div class="check-mark">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <h2>開發時間預估不準確，請後端下次改進，避免 delay 到我：）</h2>
+                            </label>
+                        </div>
+                    </div>
+                    <button class="confirm-btn" @click="checkRetro">我完成了！</button>
+                </div>
+            </div>
+            <div class="character-div">
+                <img src="./img/employ-2.png" alt="character" class="character">
+                <h2 class="character-name">小廣</h2>
+            </div>
+            <div class="alert-page" v-if="isAlertShow">
+                <div class="alert-block">
+                    <h2 class="alert-content" v-html="alertMsg"></h2>
+                    <div class="bottom-btn">
+                        <button class="chat-button" @click="confirmAlert(alertBtnText)">
+                            {{ alertBtnText }}
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="character-div">
+                    <img src="./img/employ-2.png" alt="character" class="character">
+                    <h2 class="character-name">小廣</h2>
+                </div>
+            </div>
+        </section>
+        <section class="ending-section">
+            <div class="chat-box-container">
+                <div class="chat-box" data-page="0">
+                    <h2 class="chat-content">
+                        恭喜你通過 Scrum 新手村！正式加入六角學院開發 A 組的大家庭！這是你的結業證書：
+                    </h2>
+                    <div class="bottom-btn" @click="changePage('next')">
+                        <button class="chat-button">
+                            繼續
+                            <img src="./img/go-btn.png" alt="go-btn-img" class="go-btn-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="chat-box" data-page="1" @click="showEndingPage">
+                    <div class="certificate snapshot">
+                        <div class="inside-line">
+                            <img src="./img/hex.png" alt="hex-logo" class="hex-logo">
+                            <h2 class="title">
+                                <img :src="headImgSrc" alt="certificate-picture" class="certificate-picture">
+                                結業證書
+                            </h2>
+                            <h2 class="content">
+                                {{ name }} 君<br>
+                                於{{ dateText }}參加六角學院 Scrum 新手培訓營，經測驗合格，特發給結業證書以資證明。
+                            </h2>
+                            <h2 class="sign">校長<span class="sign-font">廖洧杰</span></h2>
+                            <h2 class="footer">
+                                六角學院波利馬資訊科技有限公司<br>
+                                <span class="date">中華民國{{ dateText }}</span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="character-div">
+                <img src="./img/employ-2.png" alt="character" class="character">
+                <h2 class="character-name">小廣</h2>
+            </div>
+            <div class="ending-page">
+                <div class="certificate">
+                    <div class="inside-line">
+                        <img src="./img/hex.png" alt="hex-logo" class="hex-logo">
+                        <h2 class="title">
+                            <img :src="headImgSrc" alt="certificate-picture" class="certificate-picture">
+                            結業證書
+                        </h2>
+                        <h2 class="content">
+                            {{ name }} 君<br>
+                            於{{ dateText }}參加六角學院 Scrum 新手培訓營，經測驗合格，特發給結業證書以資證明。
+                        </h2>
+                        <h2 class="sign">校長<span class="sign-font">廖洧杰</span></h2>
+                        <h2 class="footer">
+                            六角學院波利馬資訊科技有限公司<br>
+                            <span class="date">中華民國{{ dateText }}</span>
+                        </h2>
+                    </div>
+                </div>
+                <div class="side-btn">
+                    <div class="picture-btn" @click="screenShot">
+                        <img src="./img/picture.png" alt="picture-btn-img" class="picture-btn-img">
+                        <h3 class="btn-text">畫面截圖</h3>
+                    </div>
+                    <div class="home-btn" @click="toHomePage">
+                        <img src="./img/home.png" alt="home-btn-img" class="home-btn-img">
+                        <h3 class="btn-text">回到首頁</h3>
+                    </div>
+                </div>
+                <div class="character-div">
+                    <div class="left-div">
+                        <img src="./img/employ-1.png" alt="character" class="character">
+                        <img src="./img/employ-2.png" alt="character" class="character">
+                    </div>
+                    <div class="right-div">
+                        <img src="./img/employ-3.png" alt="character" class="character">
+                        <img src="./img/employ-4.png" alt="character" class="character">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="for-preload"></div>
+    <script defer src="https://kit.fontawesome.com/0a024d1a12.js" crossorigin="anonymous"></script>
+    <script defer src="./node_modules/sortablejs/Sortable.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+    <script defer src="./node_modules/html2canvas/dist/html2canvas.min.js"></script>
+    <script defer src="./node_modules/vue/dist/vue.global.js"></script>
+    <script defer src="./js/all.js"></script>
+</body>
+</html>
