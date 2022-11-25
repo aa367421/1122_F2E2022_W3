@@ -1,5 +1,8 @@
 const sectionMap = ['cover', 'naming', 'tutorial', 'backlog', 'sprint', 'retro', 'ending']
 
+import Vue from 'vue';
+window.Vue = Vue;
+
 const vm = Vue.createApp({
     data(){
         return {
